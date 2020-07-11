@@ -1,10 +1,16 @@
 ﻿using DutchSkull.Singleton;
-using System;
 using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
 {
-    protected override void Awake() => SetInstance(this);
+    protected override void Awake()
+    {
+        SetInstance(this);
+    }
+    private void Start()
+    {
+        transform.position = PlayerData.currentNavigationPoint.transform.position;
+    }
 
     private void Update()
     {
