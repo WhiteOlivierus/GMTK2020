@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [ExecuteAlways]
-public class NavigationPointRoot : MonoBehaviour
+public class NavigationRoot : MonoBehaviour
 {
     public bool canTurn = false;
 

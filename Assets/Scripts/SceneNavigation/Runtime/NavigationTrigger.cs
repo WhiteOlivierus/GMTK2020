@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class NavigationPoint : MonoBehaviour
+public class NavigationTrigger : MonoBehaviour
 {
     [SerializeField] private TextMeshPro displayText = default;
 

@@ -35,7 +35,7 @@ public class InputManager : SingleSceneSingleton<InputManager>
         GameObject navigationTrigger = GetRaycasted();
 
         if (navigationTrigger == null ||
-            !navigationTrigger.TryGetComponent(out NavigationPoint point))
+            !navigationTrigger.TryGetComponent(out NavigationTrigger point))
             return;
 
         point.OnHover();
@@ -43,7 +43,7 @@ public class InputManager : SingleSceneSingleton<InputManager>
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointRoot navigationPointData);
+        SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationRoot navigationPointData);
 
         if (navigationPointData == null)
             return;

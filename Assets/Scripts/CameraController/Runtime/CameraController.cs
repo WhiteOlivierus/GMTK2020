@@ -87,7 +87,7 @@ public class CameraController
     }
 
     private PlayerData PlayerData => PlayerData.Instance;
-    private NavigationPointRoot CurrentNavigationPoint => PlayerData.currentNavigationPoint;
+    private NavigationRoot CurrentNavigationPoint => PlayerData.currentNavigationPoint;
 
     private static float WrapAngle(float angle)
     {
