@@ -1,5 +1,4 @@
 ﻿using DutchSkull.Singleton;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +12,8 @@ public class MouseController : SingleSceneSingleton<MouseController>
 
     private MouseEmotionState currentState = default;
 
+    private int animationIndex = 0;
+
     protected override void Awake() => SetInstance(this);
 
     private void Start()
@@ -23,15 +24,29 @@ public class MouseController : SingleSceneSingleton<MouseController>
 
     private void LoadStates() => emotions = Resources.LoadAll<MouseEmotionState>("States/").ToList();
 
-    private void Update() => Cursor.SetCursor(currentState.cursorAnimation[0], hotSpot, cursorMode);
+    private void Update() => LoopAnimation(currentState.cursorAnimation);
 
-    public void SetMouseState(MouseEmotion emotion) => currentState = emotions.Where(x => x.emotion == emotion).First();
-}
+    private void LoopAnimation(CursorAnimation cursorAnimation)
+    {
+        if (animationIndex >= cursorAnimation.animation.Length)
+            animationIndex = 0;
 
+        Cursor.SetCursor(cursorAnimation.animation[animationIndex], hotSpot, cursorMode);
 
-public enum MouseEmotion
-{
-    Calm,
-    Grumpy,
-    Murdery
+        animationIndex++;
+    }
+
+    public void SetMouseState(MouseEmotion emotion)
+    {
+        currentState = emotions.Where(states => states.emotion == emotion).First();
+        DialogueManager.StartDialogue(currentState.dialogue);
+    }
+
+    public void SetMouseState(MouseEmotionState state)
+    {
+        currentState = state;
+        DialogueManager.StartDialogue(currentState.dialogue);
+    }
+
+    private DialogueManager DialogueManager => DialogueManager.Instance;
 }

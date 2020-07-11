@@ -1,10 +1,11 @@
 ﻿using DutchSkull.Singleton;
-using System;
 using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
 {
     protected override void Awake() => SetInstance(this);
+
+    [SerializeField] private MouseEmotionState testState = default;
 
     private void Update()
     {
@@ -23,8 +24,8 @@ public class InputManager : SingleSceneSingleton<InputManager>
             MouseController.Instance.SetMouseState(MouseEmotion.Grumpy);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             MouseController.Instance.SetMouseState(MouseEmotion.Murdery);
-        //else if (Input.GetKeyDown(KeyCode.Alpha4))
-        //    MouseController.Instance.SetMouseState();
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            MouseController.Instance.SetMouseState(testState);
     }
 
     private void Interact()

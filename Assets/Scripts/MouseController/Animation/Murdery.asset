@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Grumpy
-  m_EditorClassIdentifier: Assembly-CSharp::MouseEmotionState
-  emotion: 1
-  cursorAnimation: {fileID: 11400000, guid: 84664a0d27890234eb0e5bff00ffb395, type: 2}
-  speechLines: []
+  m_Script: {fileID: 11500000, guid: 08569c3288b0de046b672ffbeb8d806c, type: 3}
+  m_Name: Murdery
+  m_EditorClassIdentifier: Assembly-CSharp::CursorAnimation
+  animation:
+  - {fileID: 2800000, guid: 0d19475024e3e3d42a409d4ae83cd155, type: 3}

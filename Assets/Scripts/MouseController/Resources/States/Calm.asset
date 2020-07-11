@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Calm
   m_EditorClassIdentifier: Assembly-CSharp::MouseEmotionState
   emotion: 0
-  cursorAnimation:
-  - {fileID: 2800000, guid: 4120c1139d0fc0142bda33ac1a0727a0, type: 3}
+  cursorAnimation: {fileID: 11400000, guid: a49e171626bcfa04d90eb3ec235056e9, type: 2}
   speechLines: []

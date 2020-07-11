@@ -4,6 +4,6 @@
 public class MouseEmotionState : ScriptableObject
 {
     public MouseEmotion emotion = MouseEmotion.Calm;
-    public Texture2D[] cursorAnimation = default;
-    public AudioClip[] speechLines = default;
+    public CursorAnimation cursorAnimation = default;
+    public DialogueObject dialogue = default;
 }
