@@ -36,6 +36,9 @@ public class CameraController
 
         Debug.Log($"{nameof(CameraController)}: Next target angle is {currentTargetAngle}");
 
+        if (PlayerData.currentNavigationPoint.fullCircle)
+            return;
+
         if (currentTargetAngle > CurrentNavigationPoint.maxAngleRight ||
             currentTargetAngle < CurrentNavigationPoint.maxAngleLeft)
             EndTurn();

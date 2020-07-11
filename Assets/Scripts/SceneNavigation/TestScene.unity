@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a680e984839698d4ab00bae2eb4e063f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canTurn: 1
+  canTurn: 0
   fullCircle: 1
   maxAngleLeft: 0
   maxAngleRight: 0
@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canTurn: 1
-  fullCircle: 1
+  fullCircle: 0
   maxAngleLeft: -181
   maxAngleRight: 91
 --- !u!1 &1571663155
@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a680e984839698d4ab00bae2eb4e063f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canTurn: 0
+  canTurn: 1
   fullCircle: 1
   maxAngleLeft: 0
   maxAngleRight: 0
