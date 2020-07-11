@@ -6,9 +6,9 @@ public class DialogueTriggerObject : MonoBehaviour
 {
     public bool triggerByTouch;
 
-    [SerializeField] private DialogueObject dialogue;
-    [SerializeField] private UnityEvent preDialogueMethod;
-    [SerializeField] private UnityEvent dialogueMethod;
+    [SerializeField] private DialogueObject dialogue = default;
+    [SerializeField] private UnityEvent preDialogueMethod = default;
+    [SerializeField] private UnityEvent dialogueMethod = default;
     public bool Interacted { get; set; }
 
     public void Interact()

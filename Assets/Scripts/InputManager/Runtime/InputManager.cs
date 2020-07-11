@@ -19,13 +19,13 @@ public class InputManager : SingleSceneSingleton<InputManager>
     private void ChangeMouseState()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            MouseController.Instance.SetMouseState(MouseEmotion.Calm);
+            MouseController.SetMouseState(MouseEmotion.Calm);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-            MouseController.Instance.SetMouseState(MouseEmotion.Grumpy);
+            MouseController.SetMouseState(MouseEmotion.Grumpy);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-            MouseController.Instance.SetMouseState(MouseEmotion.Murdery);
+            MouseController.SetMouseState(MouseEmotion.Murdery);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
-            MouseController.Instance.SetMouseState(testState);
+            MouseController.SetMouseState(testState);
     }
 
     private void Interact()
@@ -75,6 +75,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
     }
 
     private SceneNavigation SceneNavigation => SceneNavigation.Instance;
-
     private PlayerData PlayerData => PlayerData.Instance;
+    private MouseController MouseController => MouseController.Instance;
 }

@@ -6,30 +6,15 @@ using DutchSkull.Singleton;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    private GameObject dialogueBox;
-    [SerializeField] private TMP_Text textObject;
-    //private AudioSource dialogueAudio;
+    private GameObject dialogueBox = default;
 
-    private UnityEvent dialogueMethod;
-    private DialogueObject currentDialogue;
-    private int dialogueIndex;
-    private bool dialogueMode = false;
-    private bool firstLine;
-    private bool custom = false;
+    [SerializeField] private TMP_Text textObject = default;
 
-    private void Update()
-    {
-        if (!dialogueMode)
-            return;
+    private UnityEvent dialogueMethod = default;
 
-        if (firstLine)
-        {
-            firstLine = false;
-            return;
-        }
+    private DialogueObject currentDialogue = default;
 
-        NextDialogue();
-    }
+    private int dialogueIndex = default;
 
     private IEnumerator TriggerNextDialogue(float time)
     {
@@ -49,14 +34,8 @@ public class DialogueManager : Singleton<DialogueManager>
         }
         else
         {
-            dialogueMode = false;
-
-            //if (!custom)
-            //    dialogueBox.SetActive(false);
-
             currentDialogue = null;
             dialogueIndex = 0;
-            custom = false;
 
             StopAllCoroutines();
 
@@ -74,79 +53,20 @@ public class DialogueManager : Singleton<DialogueManager>
         if (!CheckDialogue(dialogue))
             return;
 
-        dialogueMode = true;
         dialogueMethod = dm;
 
-        if (box != default)
-        {
-            //dialogueBox = box;
-            custom = true;
-        }
-        else
-        {
-            //dialogueBox = null;
-        }
-
-        //GetDialogueBox();
-
-        //InnitDialogueBox();
-
-        if (dialogueIndex == 0)
-        {
-            firstLine = true;
-            //dialogueBox.SetActive(true);
-            ShowDialogue(dialogue.lines[dialogueIndex]);
-        }
-        else
-        {
-            dialogueMode = true;
-        }
-    }
-
-    private void InnitDialogueBox()
-    {
-        //dialogueAudio = GameObject.Find("DialogueSource").GetComponentInChildren<AudioSource>();
-
-        //if (dialogueAudio == null)
-        //dialogueAudio = dialogueBox.AddComponent<AudioSource>();
-
-        dialogueBox.SetActive(false);
-    }
-
-    private void GetDialogueBox()
-    {
-        //if (dialogueBox != null)
-        return;
-
-        //dialogueBox = GameObject.Find("DialogueBox");
-
-        if (dialogueBox != null)
-            return;
-
-        //GameObject original = (GameObject)Resources.Load("Prefabs/DialogueBox");
-        //dialogueBox = Instantiate(original, transform);
-        //dialogueBox.name = original.name;
+        ShowDialogue(dialogue.lines[dialogueIndex]);
     }
 
     private void ShowDialogue(DialogueLine dialogueLine)
     {
         StopAllCoroutines();
 
-        try
-        {
-            StartCoroutine(TypeWriteText(textObject, dialogueLine.line));
-        }
-        catch
-        {
-            Debug.LogWarning(dialogueBox.name + " is missing a speaker box");
-        }
-
-        if (dialogueLine.audio != null && dialogueLine.audio != default)
-            StartCoroutine(TriggerNextDialogue(dialogueLine.audio.length));
-        else
-            StartCoroutine(TriggerNextDialogue(2f));
+        StartCoroutine(TypeWriteText(textObject, dialogueLine.line));
 
         AudioManager.Instance.PlayDialogueAudio(dialogueLine.audio);
+
+        StartCoroutine(TriggerNextDialogue(dialogueLine.audio.length + dialogueLine.delay));
     }
 
     IEnumerator TypeWriteText(TMP_Text container, string text, float duration = 1f)
@@ -155,9 +75,10 @@ public class DialogueManager : Singleton<DialogueManager>
 
         container.text = "";
 
-        for (float t = 0; t < text.Length; t += Time.deltaTime * text.Length / duration)
+        float step = Time.deltaTime * text.Length / duration;
+        for (float i = 0; i < text.Length; i += step)
         {
-            int charactersTyped = (int)Mathf.Clamp(t, 0f, text.Length - 1);
+            int charactersTyped = (int)Mathf.Clamp(i, 0f, text.Length - 1);
             int beginIndex = AmountOfCharactersPossible == 0 ? AmountOfCharactersPossible : charactersTyped - AmountOfCharactersPossible;
 
             container.text = text.Substring(beginIndex, charactersTyped - beginIndex);
