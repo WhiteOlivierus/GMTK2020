@@ -6,8 +6,6 @@ using DutchSkull.Singleton;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    private GameObject dialogueBox = default;
-
     [SerializeField] private TMP_Text textObject = default;
 
     private UnityEvent dialogueMethod = default;

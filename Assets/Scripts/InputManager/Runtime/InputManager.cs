@@ -3,14 +3,9 @@ using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
 {
-    protected override void Awake()
-    {
-        SetInstance(this);
-    }
-    private void Start()
-    {
-        transform.position = PlayerData.currentNavigationPoint.transform.position;
-    }
+    protected override void Awake() => SetInstance(this);
+
+    private void Start() => PlayerData.transform.position = PlayerData.currentNavigationPoint.transform.position;
 
     [SerializeField] private MouseEmotionState testState = default;
 
