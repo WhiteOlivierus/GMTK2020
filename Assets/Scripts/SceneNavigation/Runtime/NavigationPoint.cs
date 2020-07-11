@@ -1,38 +1,32 @@
-﻿using TMPro;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-public class NavigationPoint : MonoBehaviour
+[ExecuteAlways]
+public class NavigationPointRoot : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro displayText = default;
+    public bool canTurn = false;
 
-    private bool isHovering = false;
+#if UNITY_EDITOR
+    [ShowIf(nameof(canTurn), true, ShowIfComparisonType.Equals)]
+#endif
+    public bool fullCircle = true;
 
-    private string ParentName => transform.parent.gameObject.name;
-
-    private void Update()
-    {
-        displayText.text = string.Empty;
-
-        if (!isHovering)
-            return;
-
-        displayText.text = ParentName;
-
-        isHovering = false;
-    }
-
-    public void OnHover() => isHovering = true;
+#if UNITY_EDITOR
+    [ShowIf(nameof(fullCircle), false, ShowIfComparisonType.Equals)]
+#endif
+    [Range(0, -180)]
+    public int maxAngleLeft = 0;
+#if UNITY_EDITOR
+    [ShowIf(nameof(fullCircle), false, ShowIfComparisonType.Equals)]
+#endif
+    [Range(0, 180)]
+    public int maxAngleRight = 0;
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Color red = Color.red;
-        red.a = 0.5f;
-        Gizmos.color = red;
-        Gizmos.DrawCube(transform.position, transform.localScale);
         Handles.color = Color.blue;
-        Handles.Label(transform.position, ParentName);
+        Handles.Label(transform.position, gameObject.name);
     }
 #endif
 }
