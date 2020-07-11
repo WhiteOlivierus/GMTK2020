@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
+#if UNITY_EDITOR
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public class ShowIfAttribute : PropertyAttribute
 {
@@ -15,3 +16,4 @@ public class ShowIfAttribute : PropertyAttribute
         ComparisonType = comparisonType;
     }
 }
+#endif

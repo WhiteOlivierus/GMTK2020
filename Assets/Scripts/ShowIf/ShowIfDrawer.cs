@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ShowIfAttribute))]
 public class ShowIfDrawer : PropertyDrawer
 {
@@ -74,3 +75,4 @@ public class ShowIfDrawer : PropertyDrawer
             propertyHeight = 0f;
     }
 }
+#endif

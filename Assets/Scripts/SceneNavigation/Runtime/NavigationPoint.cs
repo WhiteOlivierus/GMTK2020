@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NavigationPoint : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro displayText;
+    [SerializeField] private TextMeshPro displayText = default;
 
     private bool isHovering = false;
 
