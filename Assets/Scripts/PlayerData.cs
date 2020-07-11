@@ -5,7 +5,7 @@ public class PlayerData : Singleton<PlayerData>
 {
     [HideInInspector] public CanvasGroup fadeGroup = default;
     [HideInInspector] public CameraController cameraController = default;
-    public NavigationPointData currentNavigationPoint = default;
+    public NavigationPointRoot currentNavigationPoint = default;
 
     private void Start()
     {

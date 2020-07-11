@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
-public class NavigationPointData : MonoBehaviour
+public class NavigationPointRoot : MonoBehaviour
 {
     public bool canTurn = false;
 
@@ -8,7 +9,13 @@ public class NavigationPointData : MonoBehaviour
     public bool fullCircle = true;
 
     [ShowIf(nameof(fullCircle), false, ShowIfComparisonType.Equals)]
+    [Range(0, -180)]
     public int maxAngleLeft = 0;
     [ShowIf(nameof(fullCircle), false, ShowIfComparisonType.Equals)]
+    [Range(0, 180)]
     public int maxAngleRight = 0;
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos() => Handles.Label(transform.position, gameObject.name);
+#endif
 }

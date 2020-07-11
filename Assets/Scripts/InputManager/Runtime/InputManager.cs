@@ -1,4 +1,5 @@
 ﻿using DutchSkull.Singleton;
+using System;
 using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
@@ -17,14 +18,15 @@ public class InputManager : SingleSceneSingleton<InputManager>
             Input.GetKeyDown(KeyCode.RightArrow))
             PlayerData.cameraController.SetDirection(1);
 
+        GameObject navigationTrigger = GetRaycasted();
+
+        if (navigationTrigger != null &&
+            navigationTrigger.TryGetComponent(out NavigationPoint point))
+            point.OnHover();
+
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject navigationTrigger = GetRaycasted();
-
-            if (navigationTrigger == null)
-                return;
-
-            SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointData navigationPointData);
+            SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointRoot navigationPointData);
 
             if (navigationPointData == null)
                 return;
@@ -46,5 +48,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
     }
 
     private SceneNavigation SceneNavigation => SceneNavigation.Instance;
+
     private PlayerData PlayerData => PlayerData.Instance;
 }

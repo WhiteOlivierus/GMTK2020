@@ -8,7 +8,7 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
     private bool fading = false;
 
-    public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationPointData navigationPointData)
+    public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationPointRoot navigationPointData)
     {
         Debug.Log($"{nameof(SceneNavigation)}: Navigating too {navigationTrigger.name}");
 
