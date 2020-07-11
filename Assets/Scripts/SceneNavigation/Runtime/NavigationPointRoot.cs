@@ -22,6 +22,10 @@ public class NavigationPointRoot : MonoBehaviour
     public int maxAngleRight = 0;
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos() => Handles.Label(transform.position, gameObject.name);
+    private void OnDrawGizmos()
+    {
+        Handles.color = Color.blue;
+        Handles.Label(transform.position, gameObject.name);
+    }
 #endif
 }

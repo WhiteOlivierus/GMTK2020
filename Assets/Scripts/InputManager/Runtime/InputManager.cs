@@ -12,7 +12,51 @@ public class InputManager : SingleSceneSingleton<InputManager>
         transform.position = PlayerData.currentNavigationPoint.transform.position;
     }
 
+    [SerializeField] private MouseEmotionState testState = default;
+
     private void Update()
+    {
+        TurnCamera();
+
+        Interact();
+
+        ChangeMouseState();
+    }
+
+    private void ChangeMouseState()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            MouseController.SetMouseState(MouseEmotion.Calm);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            MouseController.SetMouseState(MouseEmotion.Grumpy);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            MouseController.SetMouseState(MouseEmotion.Murdery);
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            MouseController.SetMouseState(testState);
+    }
+
+    private void Interact()
+    {
+        GameObject navigationTrigger = GetRaycasted();
+
+        if (navigationTrigger == null ||
+            !navigationTrigger.TryGetComponent(out NavigationPoint point))
+            return;
+
+        point.OnHover();
+
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointRoot navigationPointData);
+
+        if (navigationPointData == null)
+            return;
+
+        PlayerData.currentNavigationPoint = navigationPointData;
+    }
+
+    private void TurnCamera()
     {
         PlayerData.cameraController.Update();
 
@@ -23,22 +67,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
         if (Input.GetKeyDown(KeyCode.D) ||
             Input.GetKeyDown(KeyCode.RightArrow))
             PlayerData.cameraController.SetDirection(1);
-
-        GameObject navigationTrigger = GetRaycasted();
-
-        if (navigationTrigger != null &&
-            navigationTrigger.TryGetComponent(out NavigationPoint point))
-            point.OnHover();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointRoot navigationPointData);
-
-            if (navigationPointData == null)
-                return;
-
-            PlayerData.currentNavigationPoint = navigationPointData;
-        }
     }
 
     private GameObject GetRaycasted()
@@ -54,6 +82,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
     }
 
     private SceneNavigation SceneNavigation => SceneNavigation.Instance;
-
     private PlayerData PlayerData => PlayerData.Instance;
+    private MouseController MouseController => MouseController.Instance;
 }
