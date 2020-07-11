@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SceneNavigation : Singleton<SceneNavigation>
 {
-    private const int FADE_TIME = 300;
+    [SerializeField] private int fadeTime = 300;
+
     private bool fading = false;
 
     public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationPointData navigationPointData)
     {
-        Debug.Log(navigationTrigger.name);
+        Debug.Log($"{nameof(SceneNavigation)}: Navigating too {navigationTrigger.name}");
 
         Transform parent = navigationTrigger.transform.parent;
 
@@ -48,9 +49,9 @@ public class SceneNavigation : Singleton<SceneNavigation>
     {
         fading = true;
 
-        for (int i = FADE_TIME; i > 0; i--)
+        for (int i = fadeTime; i > 0; i--)
         {
-            fadeGroup.alpha = (1f / FADE_TIME) * i;
+            fadeGroup.alpha = (1f / fadeTime) * i;
             yield return null;
         }
 
@@ -61,9 +62,9 @@ public class SceneNavigation : Singleton<SceneNavigation>
     {
         fading = true;
 
-        for (int i = 0; i < FADE_TIME; i++)
+        for (int i = 0; i < fadeTime; i++)
         {
-            fadeGroup.alpha = (1f / FADE_TIME) * i;
+            fadeGroup.alpha = (1f / fadeTime) * i;
             yield return null;
         }
 

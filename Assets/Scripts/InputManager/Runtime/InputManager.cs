@@ -7,6 +7,8 @@ public class InputManager : SingleSceneSingleton<InputManager>
 
     private void Update()
     {
+        PlayerData.cameraController.Update();
+
         if (Input.GetKeyDown(KeyCode.A) ||
         Input.GetKeyDown(KeyCode.LeftArrow))
             PlayerData.cameraController.SetDirection(-1);
@@ -14,8 +16,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
         if (Input.GetKeyDown(KeyCode.D) ||
             Input.GetKeyDown(KeyCode.RightArrow))
             PlayerData.cameraController.SetDirection(1);
-
-        PlayerData.cameraController.Update();
 
         if (Input.GetMouseButtonDown(0))
         {
