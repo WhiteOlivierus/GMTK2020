@@ -8,6 +8,48 @@ public class InputManager : SingleSceneSingleton<InputManager>
 
     private void Update()
     {
+        TurnCamera();
+
+        Interact();
+
+        ChangeMouseState();
+    }
+
+    private void ChangeMouseState()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            MouseController.Instance.SetMouseState(MouseEmotion.Calm);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            MouseController.Instance.SetMouseState(MouseEmotion.Grumpy);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            MouseController.Instance.SetMouseState(MouseEmotion.Murdery);
+        //else if (Input.GetKeyDown(KeyCode.Alpha4))
+        //    MouseController.Instance.SetMouseState();
+    }
+
+    private void Interact()
+    {
+        GameObject navigationTrigger = GetRaycasted();
+
+        if (navigationTrigger == null ||
+            !navigationTrigger.TryGetComponent(out NavigationPoint point))
+            return;
+
+        point.OnHover();
+
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointRoot navigationPointData);
+
+        if (navigationPointData == null)
+            return;
+
+        PlayerData.currentNavigationPoint = navigationPointData;
+    }
+
+    private void TurnCamera()
+    {
         PlayerData.cameraController.Update();
 
         if (Input.GetKeyDown(KeyCode.A) ||
@@ -17,22 +59,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
         if (Input.GetKeyDown(KeyCode.D) ||
             Input.GetKeyDown(KeyCode.RightArrow))
             PlayerData.cameraController.SetDirection(1);
-
-        GameObject navigationTrigger = GetRaycasted();
-
-        if (navigationTrigger != null &&
-            navigationTrigger.TryGetComponent(out NavigationPoint point))
-            point.OnHover();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointRoot navigationPointData);
-
-            if (navigationPointData == null)
-                return;
-
-            PlayerData.currentNavigationPoint = navigationPointData;
-        }
     }
 
     private GameObject GetRaycasted()
