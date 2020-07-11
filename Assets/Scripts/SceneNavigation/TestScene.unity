@@ -542,6 +542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1330868474}
+  - component: {fileID: 1330868475}
   m_Layer: 0
   m_Name: WoonKamer
   m_TagString: NavigationPoint
@@ -565,6 +566,21 @@ Transform:
   m_Father: {fileID: 332285153}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330868475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330868473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a680e984839698d4ab00bae2eb4e063f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTurn: 1
+  turnsLeft: 0
+  turnsRight: 0
 --- !u!1 &1571663155
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2021160726}
+  - component: {fileID: 2021160723}
   m_Layer: 0
   m_Name: BadKamer
   m_TagString: NavigationPoint
@@ -767,6 +784,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2021160723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021160722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a680e984839698d4ab00bae2eb4e063f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTurn: 0
+  turnsLeft: 0
+  turnsRight: 0
 --- !u!4 &2021160726
 Transform:
   m_ObjectHideFlags: 0
@@ -895,6 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeGroup: {fileID: 0}
+  currentNavigationPoint: {fileID: 1330868475}
 --- !u!1001 &6527241900470147298
 PrefabInstance:
   m_ObjectHideFlags: 0

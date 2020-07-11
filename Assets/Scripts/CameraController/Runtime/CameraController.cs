@@ -25,6 +25,9 @@ public class CameraController
         if (!active)
             return;
 
+        if (!PlayerData.currentNavigationPoint.canTurn)
+            return;
+
         if (!done)
             return;
 
@@ -73,4 +76,6 @@ public class CameraController
 
         transform.Rotate(eulers);
     }
+
+    private PlayerData PlayerData => PlayerData.Instance;
 }

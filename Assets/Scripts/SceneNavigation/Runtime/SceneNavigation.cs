@@ -5,17 +5,18 @@ using UnityEngine;
 public class SceneNavigation : Singleton<SceneNavigation>
 {
     private const int FADE_TIME = 300;
-    private const string TAG = "NavigationPoint";
     private bool fading = false;
 
-    public void Navigate(PlayerData playerData, GameObject navigationTrigger)
+    public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationPointData navigationPointData)
     {
         Debug.Log(navigationTrigger.name);
 
-        if (!navigationTrigger.transform.parent.CompareTag(TAG))
+        Transform parent = navigationTrigger.transform.parent;
+
+        if (!parent.TryGetComponent(out navigationPointData))
             return;
 
-        StartCoroutine(Move(playerData, navigationTrigger.transform.parent));
+        StartCoroutine(Move(playerData, parent));
     }
 
     private IEnumerator Move(PlayerData playerData, Transform parent)

@@ -24,7 +24,12 @@ public class InputManager : SingleSceneSingleton<InputManager>
             if (navigationTrigger == null)
                 return;
 
-            SceneNavigation.Navigate(PlayerData, navigationTrigger);
+            SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationPointData navigationPointData);
+
+            if (navigationPointData == null)
+                return;
+
+            PlayerData.currentNavigationPoint = navigationPointData;
         }
     }
 
