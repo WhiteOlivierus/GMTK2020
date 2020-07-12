@@ -33,6 +33,14 @@ public class SceneNavigation : Singleton<SceneNavigation>
             currentNavigationPoint.onArrival.Invoke();
     }
 
+    public void Back()
+    {
+        if (lastNavigationPoint == null)
+            return;
+
+        StartCoroutine(Move(lastNavigationPoint));
+    }
+
     public void Navigate(GameObject navigationTrigger)
     {
         if (navigating)
@@ -47,10 +55,10 @@ public class SceneNavigation : Singleton<SceneNavigation>
         if (!parent.TryGetComponent(out NavigationRoot navigationPointData))
             return;
 
-        StartCoroutine(Move(parent, navigationPointData));
+        StartCoroutine(Move(navigationPointData));
     }
 
-    private IEnumerator Move(Transform parent, NavigationRoot navigationPointData)
+    private IEnumerator Move(NavigationRoot navigationPointData)
     {
         //Disable movement
         PlayerData.cameraController.active = false;
@@ -68,8 +76,8 @@ public class SceneNavigation : Singleton<SceneNavigation>
                 currentNavigationPoint.onExit.Invoke();
 
         //Set player position to root position of navigation trigger
-        PlayerData.transform.position = parent.position;
-        PlayerData.transform.rotation = parent.rotation;
+        PlayerData.transform.position = navigationPointData.transform.position;
+        PlayerData.transform.rotation = navigationPointData.transform.rotation;
 
         if (playerMoved != null)
             playerMoved.Invoke();

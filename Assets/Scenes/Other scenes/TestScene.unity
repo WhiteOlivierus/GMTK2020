@@ -1680,6 +1680,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2026512987}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2070603331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8344709036212711976, guid: 79eb7b496f27cf945b3e6cb0e32c8091,
+    type: 3}
+  m_PrefabInstance: {fileID: 8344709036223468095}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e94ee13ab5f8cb4ea1288a284f5f96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2101181485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4754154884770029326, guid: 1628d115920182144bb0a3a252f3f568,
@@ -1761,6 +1773,11 @@ PrefabInstance:
     - target: {fileID: 1133269408752317582, guid: d880e3d6fa1de2c428ae151d2acf6dd4,
         type: 3}
       propertyPath: fullCircle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133269408752317582, guid: d880e3d6fa1de2c428ae151d2acf6dd4,
+        type: 3}
+      propertyPath: halfTurn
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1133269408752317583, guid: d880e3d6fa1de2c428ae151d2acf6dd4,
@@ -1777,6 +1794,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 708522455, guid: 76555d49634fec94f8e3e9532d47266f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2070603331}
+    - target: {fileID: 1012855153, guid: 76555d49634fec94f8e3e9532d47266f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2070603331}
+    - target: {fileID: 1619373030, guid: 76555d49634fec94f8e3e9532d47266f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2070603331}
     - target: {fileID: 2643329209064759137, guid: 76555d49634fec94f8e3e9532d47266f,
         type: 3}
       propertyPath: m_Name
