@@ -1,4 +1,5 @@
 ﻿using DutchSkull.Singleton;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
     private bool fading = false;
     private bool navigating = false;
+
+    public Action playerMoved;
 
     public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationRoot navigationPointData)
     {
@@ -42,6 +45,8 @@ public class SceneNavigation : Singleton<SceneNavigation>
         //Set player position to root position of navigation trigger
         playerData.transform.position = parent.position;
         playerData.transform.rotation = parent.rotation;
+
+        playerMoved.Invoke();
 
         //Fade in
         StartCoroutine(FadeIn(playerData.fadeGroup));

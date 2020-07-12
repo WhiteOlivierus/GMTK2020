@@ -1,11 +1,18 @@
 ﻿using DutchSkull.Singleton;
+using System;
 using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
 {
+    public Action playerMoved;
+
     protected override void Awake() => SetInstance(this);
 
-    private void Start() => PlayerData.transform.position = PlayerData.currentNavigationPoint.transform.position;
+    private void Start()
+    {
+        PlayerData.transform.position = PlayerData.currentNavigationPoint.transform.position;
+        playerMoved.Invoke();
+    }
 
     [SerializeField] private MouseEmotionState testState = default;
 
@@ -16,39 +23,6 @@ public class InputManager : SingleSceneSingleton<InputManager>
         Interact();
 
         ChangeMouseState();
-    }
-
-    private void ChangeMouseState()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            MouseController.SetMouseState(MouseEmotion.Calm);
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-            MouseController.SetMouseState(MouseEmotion.Grumpy);
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-            MouseController.SetMouseState(MouseEmotion.Murdery);
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-            MouseController.SetMouseState(testState);
-    }
-
-    private void Interact()
-    {
-        GameObject navigationTrigger = GetRaycasted();
-
-        if (navigationTrigger == null ||
-            !navigationTrigger.TryGetComponent(out NavigationTrigger point))
-            return;
-
-        point.OnHover();
-
-        if (!Input.GetMouseButtonDown(0))
-            return;
-
-        SceneNavigation.Navigate(PlayerData, navigationTrigger, out NavigationRoot navigationPointData);
-
-        if (navigationPointData == null)
-            return;
-
-        PlayerData.currentNavigationPoint = navigationPointData;
     }
 
     private void TurnCamera()
@@ -64,6 +38,34 @@ public class InputManager : SingleSceneSingleton<InputManager>
             PlayerData.cameraController.SetDirection(1);
     }
 
+    private void Interact()
+    {
+        GameObject navigationTrigger = GetRaycasted();
+
+        if (navigationTrigger == null ||
+            !navigationTrigger.TryGetComponent(out Raycastable raycastable))
+            return;
+
+        raycastable.OnHover();
+
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        raycastable.Interact();
+    }
+
+    private void ChangeMouseState()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            MouseController.SetMouseState(MouseEmotion.Calm);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            MouseController.SetMouseState(MouseEmotion.Grumpy);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            MouseController.SetMouseState(MouseEmotion.Murdery);
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            MouseController.SetMouseState(testState);
+    }
+
     private GameObject GetRaycasted()
     {
         RaycastHit hit;
@@ -76,7 +78,7 @@ public class InputManager : SingleSceneSingleton<InputManager>
         return hit.transform.gameObject;
     }
 
-    private SceneNavigation SceneNavigation => SceneNavigation.Instance;
     private PlayerData PlayerData => PlayerData.Instance;
+
     private MouseController MouseController => MouseController.Instance;
 }
