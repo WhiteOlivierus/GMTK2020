@@ -13,7 +13,12 @@ public class PlayerData : Singleton<PlayerData>
     {
         cameraController = new CameraController(transform);
         fadeGroup = GetComponentInChildren<CanvasGroup>();
+        SceneNavigation.playerMoved += cameraController.Calibrate;
     }
 
+    private void OnDisable() => SceneNavigation.playerMoved -= cameraController.Calibrate;
+
     public void AddToInventory(InventoryItem item) => inventory.Add(item);
+
+    private SceneNavigation SceneNavigation => SceneNavigation.Instance;
 }

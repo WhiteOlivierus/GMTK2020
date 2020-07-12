@@ -13,7 +13,7 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
     public Action playerMoved;
 
-    private void Awake()
+    private void Start()
     {
         fader = gameObject.GetComponent<Fader>();
 
@@ -21,6 +21,9 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
         PlayerData.transform.position = gameObject1.transform.parent.GetChild(0).position;
         PlayerData.transform.rotation = gameObject1.transform.parent.GetChild(0).rotation;
+
+        if (playerMoved != null)
+            playerMoved.Invoke();
 
         NavigationRoot navigationPointData = gameObject1.transform.parent.GetComponentInChildren<NavigationRoot>();
 

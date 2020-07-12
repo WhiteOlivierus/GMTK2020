@@ -30,6 +30,10 @@ public class NavigationRoot : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
+        Vector3 direction = transform.TransformDirection(Vector3.forward);
+        Gizmos.DrawRay(transform.position, direction);
+
         Handles.color = Color.blue;
         Handles.Label(transform.position, gameObject.name);
     }
