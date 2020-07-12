@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
 {
-    public Action playerMoved = default;
-
     protected override void Awake() => SetInstance(this);
-
-    private void Start()
-    {
-        PlayerData.transform.position = PlayerData.currentNavigationPoint.transform.position;
-
-        if (playerMoved != null)
-            playerMoved.Invoke();
-    }
 
     [SerializeField] private MouseEmotionState testState = default;
 

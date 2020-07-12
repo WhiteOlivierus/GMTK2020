@@ -7,15 +7,7 @@ public class NavigationTrigger : Raycastable
 
     public override void OnHover() => base.OnHover();
 
-    public override void Interact()
-    {
-        SceneNavigation.Navigate(PlayerData, gameObject, out NavigationRoot navigationPointData);
-
-        if (navigationPointData == null)
-            return;
-
-        PlayerData.currentNavigationPoint = navigationPointData;
-    }
+    public override void Interact() => SceneNavigation.Navigate(gameObject);
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

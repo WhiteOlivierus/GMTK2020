@@ -11,7 +11,6 @@ public class PlayerData : Singleton<PlayerData>
 
     private void Awake()
     {
-        GameObject.FindGameObjectWithTag("FirstNavPoint").TryGetComponent(out currentNavigationPoint);
         cameraController = new CameraController(transform);
         fadeGroup = GetComponentInChildren<CanvasGroup>();
     }

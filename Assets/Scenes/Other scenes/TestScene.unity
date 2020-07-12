@@ -430,6 +430,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a680e984839698d4ab00bae2eb4e063f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &532754403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8344709036487857887, guid: 79eb7b496f27cf945b3e6cb0e32c8091,
+    type: 3}
+  m_PrefabInstance: {fileID: 8344709036223468095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &532754406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532754403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f48f3734e8bfe4b878aaa398b42603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 300
+  fadeGroup: {fileID: 1771132225}
 --- !u!114 &640233689 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2643329210608756200, guid: 76555d49634fec94f8e3e9532d47266f,
@@ -662,6 +682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NavigationTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754154884770029325, guid: 1628d115920182144bb0a3a252f3f568,
+        type: 3}
+      propertyPath: m_TagString
+      value: FirstNavPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4754154884770029326, guid: 1628d115920182144bb0a3a252f3f568,
         type: 3}
@@ -1274,6 +1299,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1721700019}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &1771132225 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 398857018, guid: 76555d49634fec94f8e3e9532d47266f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6527241900470147298}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1858155921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1591,6 +1622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Woonkamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133269408752317583, guid: d880e3d6fa1de2c428ae151d2acf6dd4,
+        type: 3}
+      propertyPath: m_TagString
+      value: FirstNavPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d880e3d6fa1de2c428ae151d2acf6dd4, type: 3}
