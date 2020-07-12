@@ -12,7 +12,7 @@ public abstract class Raycastable : MonoBehaviour
 
     private Color[] originalColor = new Color[0];
 
-    private void Start()
+    private void Awake()
     {
         if (objectToHighlight == null)
             return;
@@ -27,28 +27,21 @@ public abstract class Raycastable : MonoBehaviour
 
     private void Update()
     {
+        Highlight();
+
         if (!isHovering)
         {
-            Debug.Log("UnHover");
-
             UnHighlight();
             return;
         }
-
-        Debug.Log("Hover");
-
-        Highlight();
-
-        isHovering = false;
     }
+
+    private void LateUpdate() => isHovering = false;
 
     private void Highlight()
     {
         for (int i = 0; i < materials.Length; i++)
-        {
-            originalColor[i] = materials[i].color;
             materials[i].color = highlightColor;
-        }
     }
 
     private void UnHighlight()
