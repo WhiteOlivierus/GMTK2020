@@ -12,7 +12,7 @@ public class SceneNavigation : Singleton<SceneNavigation>
     {
         Debug.Log($"{nameof(SceneNavigation)}: Navigating too {navigationTrigger.name}");
 
-        Transform parent = navigationTrigger.transform.parent;
+        Transform parent = navigationTrigger.transform.parent.GetChild(0);
 
         if (!parent.TryGetComponent(out navigationPointData))
             return;
