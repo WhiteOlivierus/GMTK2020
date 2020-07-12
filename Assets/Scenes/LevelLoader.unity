@@ -241,25 +241,51 @@ PrefabInstance:
     - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
         type: 3}
       propertyPath: scenes.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
+        type: 3}
+      propertyPath: afterSceneIsLoaded.m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
         type: 3}
       propertyPath: scenes.Array.data[0]
       value: 
-      objectReference: {fileID: 102900000, guid: e9f23040c1a5d474eb4c7811e2830be3,
+      objectReference: {fileID: 102900000, guid: 756011aae21b5d44893f02d76fbae02b,
         type: 3}
     - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
         type: 3}
       propertyPath: scenes.Array.data[1]
       value: 
-      objectReference: {fileID: 102900000, guid: cec109fb57d6fb64ca6f12b5c479b519,
+      objectReference: {fileID: 102900000, guid: e9f23040c1a5d474eb4c7811e2830be3,
         type: 3}
     - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
         type: 3}
       propertyPath: scenes.Array.data[2]
       value: 
+      objectReference: {fileID: 102900000, guid: cec109fb57d6fb64ca6f12b5c479b519,
+        type: 3}
+    - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
+        type: 3}
+      propertyPath: scenes.Array.data[3]
+      value: 
       objectReference: {fileID: 102900000, guid: 3cadd9d83c4cfa643bb7f2446a264d1d,
         type: 3}
+    - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
+        type: 3}
+      propertyPath: scenes.Array.data[0].m_Handle
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
+        type: 3}
+      propertyPath: afterSceneIsLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799184423887529449, guid: 53922015217cb8c429b03268e3af60ff,
+        type: 3}
+      propertyPath: afterSceneIsLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53922015217cb8c429b03268e3af60ff, type: 3}
