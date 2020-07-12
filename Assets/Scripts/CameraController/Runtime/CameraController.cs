@@ -84,7 +84,6 @@ public class CameraController
         if (targetAngle > 0)
             return;
 
-        //transform.eulerAngles = (new Vector3(0, Mathf.Round(transform.rotation.eulerAngles.y), 0));
         EndTurn();
     }
 
@@ -98,7 +97,7 @@ public class CameraController
 
         targetAngle -= Mathf.Abs(eulers.y);
 
-        transform.Rotate(eulers);
+        transform.RotateAround(transform.position, Vector3.up, eulers.y);
     }
 
     private static float WrapAngle(float angle)
