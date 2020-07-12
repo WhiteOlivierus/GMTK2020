@@ -5,4 +5,5 @@
 public class DialogueObject : ScriptableObject
 {
     public DialogueLine[] lines;
+    internal object dm;
 }

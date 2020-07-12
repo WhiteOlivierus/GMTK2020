@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.Events;
 using System.Collections;
 using DutchSkull.Singleton;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField] private TMP_Text textObject = default;
-
-    private UnityEvent dialogueMethod = default;
+    [SerializeField] private GameObject panel = default;
 
     private DialogueObject currentDialogue = default;
 
@@ -27,6 +25,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
         if (dialogueIndex < currentDialogue.lines.Length)
         {
+            Debug.Log("Show dialogue");
             ShowDialogue(currentDialogue.lines[dialogueIndex]);
             return;
         }
@@ -34,24 +33,19 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             currentDialogue = null;
             dialogueIndex = 0;
-
-            StopAllCoroutines();
-
-            if (dialogueMethod == null)
-                return;
-
-            dialogueMethod.Invoke();
+            textObject.text = string.Empty;
+            panel.SetActive(false);
 
             return;
         }
     }
 
-    public void StartDialogue(DialogueObject dialogue, GameObject box = default, UnityEvent dm = null)
+    public void StartDialogue(DialogueObject dialogue)
     {
         if (!CheckDialogue(dialogue))
             return;
 
-        dialogueMethod = dm;
+        panel.SetActive(true);
 
         ShowDialogue(dialogue.lines[dialogueIndex]);
     }
@@ -60,11 +54,18 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         StopAllCoroutines();
 
-        StartCoroutine(TypeWriteText(textObject, dialogueLine.line));
+        if (dialogueLine.audio != null)
+            StartCoroutine(TypeWriteText(textObject, dialogueLine.line, dialogueLine.audio.length));
+        else
+            StartCoroutine(TypeWriteText(textObject, dialogueLine.line));
 
-        AudioManager.Instance.PlayDialogueAudio(dialogueLine.audio);
+        if (dialogueLine.audio != null)
+            AudioManager.Instance.PlayDialogueAudio(dialogueLine.audio);
 
-        StartCoroutine(TriggerNextDialogue(dialogueLine.audio.length + dialogueLine.delay));
+        if (dialogueLine.audio != null)
+            StartCoroutine(TriggerNextDialogue(dialogueLine.audio.length + dialogueLine.delay));
+        else
+            StartCoroutine(TriggerNextDialogue(2f + dialogueLine.delay));
     }
 
     IEnumerator TypeWriteText(TMP_Text container, string text, float duration = 1f)

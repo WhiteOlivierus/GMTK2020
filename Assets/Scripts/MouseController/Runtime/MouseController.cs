@@ -14,6 +14,8 @@ public class MouseController : SingleSceneSingleton<MouseController>
 
     private int animationIndex = 0;
 
+    public bool showMouse = false;
+
     protected override void Awake() => SetInstance(this);
 
     private void Start()
@@ -24,7 +26,15 @@ public class MouseController : SingleSceneSingleton<MouseController>
 
     private void LoadStates() => emotions = Resources.LoadAll<MouseEmotionState>("States/").ToList();
 
-    private void Update() => LoopAnimation(currentState.cursorAnimation);
+    private void Update()
+    {
+        Cursor.visible = showMouse;
+
+        if (!showMouse)
+            return;
+
+        LoopAnimation(currentState.cursorAnimation);
+    }
 
     private void LoopAnimation(CursorAnimation cursorAnimation)
     {

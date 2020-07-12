@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 [ExecuteAlways]
 public class NavigationRoot : MonoBehaviour
@@ -21,6 +22,10 @@ public class NavigationRoot : MonoBehaviour
 #endif
     [Range(0, 180)]
     public int maxAngleRight = 0;
+
+    public UnityEvent onArrival = default;
+
+    public UnityEvent onExit = default;
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

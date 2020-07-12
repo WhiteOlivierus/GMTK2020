@@ -1,28 +1,13 @@
-﻿using TMPro;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-public class NavigationTrigger : MonoBehaviour
+public class NavigationTrigger : Raycastable
 {
-    [SerializeField] private TextMeshPro displayText = default;
-
-    private bool isHovering = false;
-
     private string ParentName => transform.parent.GetChild(0).gameObject.name;
 
-    private void Update()
-    {
-        displayText.text = string.Empty;
+    public override void OnHover() => base.OnHover();
 
-        if (!isHovering)
-            return;
-
-        displayText.text = ParentName;
-
-        isHovering = false;
-    }
-
-    public void OnHover() => isHovering = true;
+    public override void Interact() => SceneNavigation.Navigate(gameObject);
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -35,4 +20,7 @@ public class NavigationTrigger : MonoBehaviour
         Handles.Label(transform.position, ParentName);
     }
 #endif
+
+    private SceneNavigation SceneNavigation => SceneNavigation.Instance;
+    private PlayerData PlayerData => PlayerData.Instance;
 }

@@ -23,7 +23,7 @@ public class CameraController
     public void SetDirection(int value)
     {
         if (!active ||
-            !PlayerData.currentNavigationPoint.canTurn ||
+            !CurrentNavigationPoint.canTurn ||
             !done)
             return;
 
@@ -36,7 +36,7 @@ public class CameraController
 
         Debug.Log($"{nameof(CameraController)}: Next target angle is {currentTargetAngle}");
 
-        if (PlayerData.currentNavigationPoint.fullCircle)
+        if (CurrentNavigationPoint.fullCircle)
             return;
 
         if (currentTargetAngle > CurrentNavigationPoint.maxAngleRight ||
@@ -87,7 +87,7 @@ public class CameraController
     }
 
     private PlayerData PlayerData => PlayerData.Instance;
-    private NavigationRoot CurrentNavigationPoint => PlayerData.currentNavigationPoint;
+    private NavigationRoot CurrentNavigationPoint => SceneNavigation.Instance.currentNavigationPoint;
 
     private static float WrapAngle(float angle)
     {

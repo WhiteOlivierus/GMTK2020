@@ -56,9 +56,9 @@ public class DialogueTriggerObject : MonoBehaviour
         TMP_Text tMP_Text = gameObject.GetComponentInChildren<TMP_Text>();
 
         if (tMP_Text)
-            DialogueManager.Instance.StartDialogue(dialogue, gameObject, dialogueMethod);
+            DialogueManager.Instance.StartDialogue(dialogue);
         else
-            DialogueManager.Instance.StartDialogue(dialogue, null, dialogueMethod);
+            DialogueManager.Instance.StartDialogue(dialogue);
     }
 
     [ExecuteInEditMode]
