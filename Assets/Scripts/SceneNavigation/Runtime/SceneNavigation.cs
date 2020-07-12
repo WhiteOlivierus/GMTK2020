@@ -46,7 +46,8 @@ public class SceneNavigation : Singleton<SceneNavigation>
         playerData.transform.position = parent.position;
         playerData.transform.rotation = parent.rotation;
 
-        playerMoved.Invoke();
+        if (playerMoved != null)
+            playerMoved.Invoke();
 
         //Fade in
         StartCoroutine(FadeIn(playerData.fadeGroup));

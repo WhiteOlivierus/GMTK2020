@@ -2477,6 +2477,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IngangPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7844777934041136837, guid: 8406d0a434a01cb428cacb3a05385f80,
+        type: 3}
+      propertyPath: m_TagString
+      value: FirstNavPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8406d0a434a01cb428cacb3a05385f80, type: 3}
 --- !u!1001 &929210224
