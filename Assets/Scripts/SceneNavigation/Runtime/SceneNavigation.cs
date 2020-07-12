@@ -7,9 +7,17 @@ public class SceneNavigation : Singleton<SceneNavigation>
     [SerializeField] private int fadeTime = 300;
 
     private bool fading = false;
+    private bool navigating = false;
 
-    public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationPointRoot navigationPointData)
+    public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationRoot navigationPointData)
     {
+        navigationPointData = default;
+
+        if (navigating)
+            return;
+
+        navigating = true;
+
         Debug.Log($"{nameof(SceneNavigation)}: Navigating too {navigationTrigger.name}");
 
         Transform parent = navigationTrigger.transform.parent.GetChild(0);
@@ -43,6 +51,7 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
         //Enable movement
         playerData.cameraController.active = true;
+        navigating = false;
     }
 
     public IEnumerator FadeIn(CanvasGroup fadeGroup)
