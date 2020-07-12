@@ -10,7 +10,7 @@ public class CameraController
     internal bool active = true;
 
     private float targetAngle = 0;
-    private int currentTargetAngle = 0;
+    private int currentAngle = 0;
     private int direction = 0;
 
     public CameraController(Transform transform, int angleStep = 90, float rotationSpeed = 1f)
@@ -18,30 +18,39 @@ public class CameraController
         this.transform = transform;
         this.angleStep = angleStep;
         this.rotationSpeed = rotationSpeed;
+        Calibrate();
     }
+
+    public void Calibrate() => currentAngle = 0;
 
     public void SetDirection(int value)
     {
         if (!active ||
-            !PlayerData.currentNavigationPoint.canTurn ||
+            !CurrentNavigationPoint.canTurn ||
             !done)
             return;
 
         done = false;
+
         direction = value;
 
         targetAngle = Mathf.RoundToInt(angleStep);
 
-        currentTargetAngle = (int)WrapAngle((int)transform.rotation.eulerAngles.y) + ((int)targetAngle * direction);
+        currentAngle += (int)WrapAngle(targetAngle * direction);
 
-        Debug.Log($"{nameof(CameraController)}: Next target angle is {currentTargetAngle}");
-
-        if (PlayerData.currentNavigationPoint.fullCircle)
+        if (CurrentNavigationPoint.fullCircle)
             return;
 
-        if (currentTargetAngle > CurrentNavigationPoint.maxAngleRight ||
-            currentTargetAngle < CurrentNavigationPoint.maxAngleLeft)
+        if (currentAngle > CurrentNavigationPoint.maxAngleRight ||
+            currentAngle < CurrentNavigationPoint.maxAngleLeft)
+        {
+            currentAngle -= (int)WrapAngle(targetAngle * direction);
+            done = true;
             EndTurn();
+            return;
+        }
+
+        Debug.Log($"{nameof(CameraController)}: Next target angle is {currentAngle} {targetAngle} {direction}");
     }
 
 
@@ -68,8 +77,7 @@ public class CameraController
         if (targetAngle > 0)
             return;
 
-        transform.eulerAngles = (new Vector3(0, currentTargetAngle, 0));
-
+        //transform.eulerAngles = (new Vector3(0, Mathf.Round(transform.rotation.eulerAngles.y), 0));
         EndTurn();
     }
 
@@ -86,9 +94,6 @@ public class CameraController
         transform.Rotate(eulers);
     }
 
-    private PlayerData PlayerData => PlayerData.Instance;
-    private NavigationPointRoot CurrentNavigationPoint => PlayerData.currentNavigationPoint;
-
     private static float WrapAngle(float angle)
     {
         angle %= 360;
@@ -97,4 +102,7 @@ public class CameraController
 
         return angle == 180 ? -180 : angle;
     }
+
+    private PlayerData PlayerData => PlayerData.Instance;
+    private NavigationRoot CurrentNavigationPoint => SceneNavigation.Instance.currentNavigationPoint;
 }

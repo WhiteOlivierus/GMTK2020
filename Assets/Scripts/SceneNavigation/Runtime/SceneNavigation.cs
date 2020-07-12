@@ -1,73 +1,99 @@
 ﻿using DutchSkull.Singleton;
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class SceneNavigation : Singleton<SceneNavigation>
 {
-    [SerializeField] private int fadeTime = 300;
+    private Fader fader = default;
+    private bool navigating = false;
 
-    private bool fading = false;
+    [HideInInspector] public NavigationRoot currentNavigationPoint = default;
+    [HideInInspector] public NavigationRoot lastNavigationPoint = default;
 
-    public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationPointRoot navigationPointData)
+    public Action playerMoved;
+
+    private void Start()
     {
-        Debug.Log($"{nameof(SceneNavigation)}: Navigating too {navigationTrigger.name}");
+        fader = gameObject.GetComponent<Fader>();
 
-        Transform parent = navigationTrigger.transform.parent;
+        GameObject gameObject1 = GameObject.FindGameObjectWithTag("FirstNavPoint");
 
-        if (!parent.TryGetComponent(out navigationPointData))
+        PlayerData.transform.position = gameObject1.transform.parent.GetChild(0).position;
+        PlayerData.transform.rotation = gameObject1.transform.parent.GetChild(0).rotation;
+
+        if (playerMoved != null)
+            playerMoved.Invoke();
+
+        NavigationRoot navigationPointData = gameObject1.transform.parent.GetComponentInChildren<NavigationRoot>();
+
+        currentNavigationPoint = navigationPointData;
+
+        if (currentNavigationPoint.onArrival != null)
+            currentNavigationPoint.onArrival.Invoke();
+    }
+
+    public void Navigate(GameObject navigationTrigger)
+    {
+        if (navigating)
             return;
 
-        StartCoroutine(Move(playerData, parent));
+        navigating = true;
+
+        Debug.Log($"{nameof(SceneNavigation)}: Navigating too {navigationTrigger.name}");
+
+        Transform parent = navigationTrigger.transform.parent.GetChild(0);
+
+        if (!parent.TryGetComponent(out NavigationRoot navigationPointData))
+            return;
+
+        StartCoroutine(Move(parent, navigationPointData));
     }
 
-    private IEnumerator Move(PlayerData playerData, Transform parent)
+    private IEnumerator Move(Transform parent, NavigationRoot navigationPointData)
     {
         //Disable movement
-        playerData.cameraController.active = false;
+        PlayerData.cameraController.active = false;
+
+        MouseController.showMouse = false;
 
         //Fade out
-        StartCoroutine(FadeOut(playerData.fadeGroup));
+        fader.FadeOut();
 
-        while (fading)
+        while (fader.Fading)
             yield return null;
+
+        if (currentNavigationPoint != null)
+            if (currentNavigationPoint.onExit != null)
+                currentNavigationPoint.onExit.Invoke();
 
         //Set player position to root position of navigation trigger
-        playerData.transform.position = parent.position;
-        playerData.transform.rotation = parent.rotation;
+        PlayerData.transform.position = parent.position;
+        PlayerData.transform.rotation = parent.rotation;
+
+        if (playerMoved != null)
+            playerMoved.Invoke();
 
         //Fade in
-        StartCoroutine(FadeIn(playerData.fadeGroup));
+        fader.FadeIn();
 
-        while (fading)
+        while (fader.Fading)
             yield return null;
+
+        navigating = false;
+
+        lastNavigationPoint = currentNavigationPoint;
+        currentNavigationPoint = navigationPointData;
+
+        if (currentNavigationPoint.onArrival != null)
+            currentNavigationPoint.onArrival.Invoke();
 
         //Enable movement
-        playerData.cameraController.active = true;
+        PlayerData.cameraController.active = true;
+
+        MouseController.showMouse = true;
     }
 
-    public IEnumerator FadeIn(CanvasGroup fadeGroup)
-    {
-        fading = true;
-
-        for (int i = fadeTime; i > 0; i--)
-        {
-            fadeGroup.alpha = (1f / fadeTime) * i;
-            yield return null;
-        }
-
-        fading = false;
-    }
-
-    public IEnumerator FadeOut(CanvasGroup fadeGroup)
-    {
-        fading = true;
-
-        for (int i = 0; i < fadeTime; i++)
-        {
-            fadeGroup.alpha = (1f / fadeTime) * i;
-            yield return null;
-        }
-
-        fading = false;
-    }
+    private PlayerData PlayerData => PlayerData.Instance;
+    private MouseController MouseController => MouseController.Instance;
 }
