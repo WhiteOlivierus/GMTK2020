@@ -12,6 +12,22 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
     public Action playerMoved;
 
+    private void Start()
+    {
+        //Disable movement
+        PlayerData.cameraController.active = false;
+
+        //Fade in
+        StartCoroutine(FadeIn(PlayerData.fadeGroup));
+
+        //while (fading)
+        //    yield return null;
+
+        //Enable movement
+        PlayerData.cameraController.active = true;
+        navigating = false;
+    }
+
     public void Navigate(PlayerData playerData, GameObject navigationTrigger, out NavigationRoot navigationPointData)
     {
         navigationPointData = default;
@@ -28,35 +44,35 @@ public class SceneNavigation : Singleton<SceneNavigation>
         if (!parent.TryGetComponent(out navigationPointData))
             return;
 
-        StartCoroutine(Move(playerData, parent));
+        StartCoroutine(Move(parent));
     }
 
-    private IEnumerator Move(PlayerData playerData, Transform parent)
+    private IEnumerator Move(Transform parent)
     {
         //Disable movement
-        playerData.cameraController.active = false;
+        PlayerData.cameraController.active = false;
 
         //Fade out
-        StartCoroutine(FadeOut(playerData.fadeGroup));
+        StartCoroutine(FadeOut(PlayerData.fadeGroup));
 
         while (fading)
             yield return null;
 
         //Set player position to root position of navigation trigger
-        playerData.transform.position = parent.position;
-        playerData.transform.rotation = parent.rotation;
+        PlayerData.transform.position = parent.position;
+        PlayerData.transform.rotation = parent.rotation;
 
         if (playerMoved != null)
             playerMoved.Invoke();
 
         //Fade in
-        StartCoroutine(FadeIn(playerData.fadeGroup));
+        StartCoroutine(FadeIn(PlayerData.fadeGroup));
 
         while (fading)
             yield return null;
 
         //Enable movement
-        playerData.cameraController.active = true;
+        PlayerData.cameraController.active = true;
         navigating = false;
     }
 
@@ -85,4 +101,6 @@ public class SceneNavigation : Singleton<SceneNavigation>
 
         fading = false;
     }
+
+    private PlayerData PlayerData => PlayerData.Instance;
 }
