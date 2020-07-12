@@ -9,10 +9,9 @@ public class PlayerData : Singleton<PlayerData>
     [HideInInspector] public List<InventoryItem> inventory = new List<InventoryItem>();
     [HideInInspector] public NavigationRoot currentNavigationPoint = default;
 
-    private void Awake() => GameObject.FindGameObjectWithTag("FirstNavPoint").TryGetComponent(out currentNavigationPoint);
-
-    private void Start()
+    private void Awake()
     {
+        GameObject.FindGameObjectWithTag("FirstNavPoint").TryGetComponent(out currentNavigationPoint);
         cameraController = new CameraController(transform);
         fadeGroup = GetComponentInChildren<CanvasGroup>();
     }
