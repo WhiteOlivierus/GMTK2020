@@ -1,9 +1,11 @@
 ﻿using DutchSkull.Singleton;
-using System;
 using UnityEngine;
 
 public class InputManager : SingleSceneSingleton<InputManager>
 {
+    private int direction = 0;
+    private bool directionChanged = false;
+
     protected override void Awake() => SetInstance(this);
 
     [SerializeField] private MouseEmotionState testState = default;
@@ -15,6 +17,18 @@ public class InputManager : SingleSceneSingleton<InputManager>
         Interact();
 
         ChangeMouseState();
+
+        if (directionChanged)
+        {
+            directionChanged = false;
+            PlayerData.cameraController.SetDirection(direction);
+        }
+    }
+
+    public void SetDirection(int direction)
+    {
+        this.direction = direction;
+        directionChanged = true;
     }
 
     private void TurnCamera()
@@ -23,11 +37,24 @@ public class InputManager : SingleSceneSingleton<InputManager>
 
         if (Input.GetKeyDown(KeyCode.A) ||
         Input.GetKeyDown(KeyCode.LeftArrow))
-            PlayerData.cameraController.SetDirection(-1);
+        {
+            direction = -1;
+            directionChanged = true;
+        }
 
         if (Input.GetKeyDown(KeyCode.D) ||
             Input.GetKeyDown(KeyCode.RightArrow))
-            PlayerData.cameraController.SetDirection(1);
+        {
+            direction = 1;
+            directionChanged = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) ||
+            Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            direction = 0;
+            directionChanged = true;
+        }
     }
 
     private void Interact()

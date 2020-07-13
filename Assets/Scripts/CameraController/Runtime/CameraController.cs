@@ -30,25 +30,32 @@ public class CameraController
             !done)
             return;
 
+        if (value == 0)
+        {
+            SceneNavigation.Instance.Back();
+            return;
+        }
+
         done = false;
 
         direction = value;
 
-        targetAngle = Mathf.RoundToInt(angleStep);
+        if (CurrentNavigationPoint.halfTurn)
+            targetAngle = Mathf.RoundToInt(180);
+        else
+            targetAngle = Mathf.RoundToInt(angleStep);
 
         currentAngle += (int)WrapAngle(targetAngle * direction);
 
-        if (CurrentNavigationPoint.fullCircle)
-            return;
-
-        if (currentAngle > CurrentNavigationPoint.maxAngleRight ||
-            currentAngle < CurrentNavigationPoint.maxAngleLeft)
-        {
-            currentAngle -= (int)WrapAngle(targetAngle * direction);
-            done = true;
-            EndTurn();
-            return;
-        }
+        if (!CurrentNavigationPoint.fullCircle && !CurrentNavigationPoint.halfTurn)
+            if (currentAngle > CurrentNavigationPoint.maxAngleRight ||
+                currentAngle < CurrentNavigationPoint.maxAngleLeft)
+            {
+                currentAngle -= (int)WrapAngle(targetAngle * direction);
+                done = true;
+                EndTurn();
+                return;
+            }
 
         Debug.Log($"{nameof(CameraController)}: Next target angle is {currentAngle} {targetAngle} {direction}");
     }

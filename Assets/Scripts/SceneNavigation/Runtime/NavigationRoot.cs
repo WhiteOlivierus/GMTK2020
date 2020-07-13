@@ -5,6 +5,10 @@ using UnityEngine.Events;
 [ExecuteAlways]
 public class NavigationRoot : MonoBehaviour
 {
+    public bool halfTurn = false;
+
+    public bool backButton = false;
+
     public bool canTurn = false;
 
 #if UNITY_EDITOR
