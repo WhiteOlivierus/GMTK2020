@@ -8,7 +8,7 @@ public class TurnToCamera : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
     }
 
-    private void OnEnable() => SceneNavigation.playerMoved += RotateTowards;
+    private void Awake() => SceneNavigation.playerMoved += RotateTowards;
 
     private void OnDisable() => SceneNavigation.playerMoved -= RotateTowards;
 
