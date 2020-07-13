@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802ba7c8b0865514f90b6edaf82fa41c, type: 3}
-  m_Name: 2 MouseAppears
+  m_Name: ThisPlaceIsAMess
   m_EditorClassIdentifier: 
   lines:
-  - line: Hey Ik ben mouse
-    audio: {fileID: 0}
+  - line: 
+    audio: {fileID: 8300000, guid: 8ec5bfebb15582941ba3a18077f9a9ab, type: 3}
     delay: 0

@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802ba7c8b0865514f90b6edaf82fa41c, type: 3}
-  m_Name: 1 Introduction
+  m_Name: TV_Off_OnClick
   m_EditorClassIdentifier: 
   lines:
-  - line: Oh dus hier is de murder gebeurt of zo
-    audio: {fileID: 0}
-    delay: 0
-  - line: BlaBlaBla
+  - line: The TV doesn't seem to turn on... probably because there is no power
     audio: {fileID: 0}
     delay: 0

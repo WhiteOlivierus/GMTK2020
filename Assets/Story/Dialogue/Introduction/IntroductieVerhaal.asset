@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802ba7c8b0865514f90b6edaf82fa41c, type: 3}
-  m_Name: 4 SecondTimeAddBody
+  m_Name: IntroductieVerhaal
   m_EditorClassIdentifier: 
   lines:
   - line: 
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 2aa2b20234d5ba743a60296221965d4a, type: 3}
     delay: 0
+  - line: Ah so this should be the right place
+    audio: {fileID: 0}
+    delay: 2

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 5 Computer off
   m_EditorClassIdentifier: 
   lines:
-  - line: Computer is off
+  - line: I should find the place where I can turn on the power
     audio: {fileID: 0}
     delay: 0

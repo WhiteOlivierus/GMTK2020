@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802ba7c8b0865514f90b6edaf82fa41c, type: 3}
-  m_Name: 4 SecondTimeAddBody
+  m_Name: TV_Off_Arrival
   m_EditorClassIdentifier: 
   lines:
-  - line: 
-    audio: {fileID: 0}
-    delay: 0
+  - line: hi
+    audio: {fileID: 8300000, guid: 700c0507687477f45b06a46887cfb464, type: 3}
+    delay: 1

@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802ba7c8b0865514f90b6edaf82fa41c, type: 3}
-  m_Name: MeterkastHint
+  m_Name: MouseAppears
   m_EditorClassIdentifier: 
   lines:
-  - line: Maybe de meterkast
-    audio: {fileID: 0}
+  - line: 
+    audio: {fileID: 8300000, guid: 8466e1fb3a6cb2b4cb5c22ff8424a88d, type: 3}
+    delay: 0
+  - line: 
+    audio: {fileID: 8300000, guid: 6e1f558e9e37753449dc6e6cfa623354, type: 3}
     delay: 0
