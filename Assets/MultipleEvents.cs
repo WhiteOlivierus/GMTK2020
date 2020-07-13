@@ -13,9 +13,11 @@ public class MultipleEvents : MonoBehaviour
     public void PlayCurrentDialogue()
     {
         if (currentDialogueIndex > dialogues.Count)
-            currentDialogueIndex = dialogues.Count;
+            currentDialogueIndex = dialogues.Count - 1;
 
-        dialogues[currentDialogueIndex].Invoke();
+
+        if( dialogues[currentDialogueIndex] != null)
+            dialogues[currentDialogueIndex].Invoke();
     }
 
     private DialogueManager DialogueManager => DialogueManager.Instance;

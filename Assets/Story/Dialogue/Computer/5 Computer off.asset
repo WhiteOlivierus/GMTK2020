@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 5 Computer off
   m_EditorClassIdentifier: 
   lines:
-  - line: I should find the place where I can turn on the power
-    audio: {fileID: 0}
+  - line: 
+    audio: {fileID: 8300000, guid: 7b2eba78c6ca55548bbe5f18ecdfe81a, type: 3}
     delay: 0

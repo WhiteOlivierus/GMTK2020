@@ -5,6 +5,7 @@ using DutchSkull.Singleton;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
+    [SerializeField] private bool debug = true;
     [SerializeField] private TMP_Text textObject = default;
     [SerializeField] private GameObject panel = default;
 
@@ -36,6 +37,10 @@ public class DialogueManager : Singleton<DialogueManager>
             textObject.text = string.Empty;
             panel.SetActive(false);
 
+            SceneNavigation.canNavigate = true;
+
+            PlayerData.cameraController.active = true;
+
             return;
         }
     }
@@ -44,6 +49,11 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         if (!CheckDialogue(dialogue))
             return;
+
+        if(!debug)
+            SceneNavigation.canNavigate = false;
+
+        PlayerData.cameraController.active = false;
 
         panel.SetActive(true);
 
@@ -107,4 +117,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
         return true;
     }
+
+    private PlayerData PlayerData => PlayerData.Instance;
+
+    private SceneNavigation SceneNavigation => SceneNavigation.Instance;
 }

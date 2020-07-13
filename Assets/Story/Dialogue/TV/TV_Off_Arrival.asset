@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TV_Off_Arrival
   m_EditorClassIdentifier: 
   lines:
-  - line: hi
+  - line: 
     audio: {fileID: 8300000, guid: 700c0507687477f45b06a46887cfb464, type: 3}
     delay: 1

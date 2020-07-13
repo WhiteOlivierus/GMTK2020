@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802ba7c8b0865514f90b6edaf82fa41c, type: 3}
   m_Name: Meterkast
   m_EditorClassIdentifier: 
-  lines: []
+  lines:
+  - line: Closed
+    audio: {fileID: 8300000, guid: 810939e053415b841a634a1a9a71d46d, type: 3}
+    delay: 0

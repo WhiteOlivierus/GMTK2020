@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Grumpy
   m_EditorClassIdentifier: Assembly-CSharp::CursorAnimation
   animation:
-  - {fileID: 2800000, guid: 173720b78a712184fb194e605534ba7d, type: 3}
+  - {fileID: 2800000, guid: 7d328d9bdfd00f64c90fbbeb24e11d3e, type: 3}
